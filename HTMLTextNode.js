@@ -51,11 +51,15 @@ class HTMLTextNode extends React.Component {
       if (!TEXT_TAG_NAMES.has(parentTagName) && htmlStr.trim().length === 0) {
         return ''
       } else {
-        if (nodeIndex === 0) {
-          return htmlStr.replace(RE.PREFIX_WHITESPACE, '')
-        } else {
-          return htmlStr
-        }
+        return htmlStr
+        // This was changed due to MI-2392: This line stripped leading whitespaces which broke markup like this:
+        // <p>Foo<strong> Bar</strong></p> and resulted in a concatinated version. Let's see where this change takes us.
+        // 
+        // if (nodeIndex === 0) {
+        //   return htmlStr.replace(RE.PREFIX_WHITESPACE, '')
+        // } else {
+        //   return htmlStr
+        // }
       }
     }
   }
